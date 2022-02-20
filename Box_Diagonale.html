@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Box Diagonale</title>
+</head>
+<style>
+    div {
+        height: 100px;
+        width: 100px;
+        border-color: black;
+        border-width: 2px 2px 2px 2px;
+        border-style: solid;
+        position: absolute;
+        background-color: red;
+    }
+</style>
+<script>
+    var startx = 0;
+    var starty = 0;
+
+    function diagonale() {
+        setInterval(function() {
+            document.getElementById('box').style.marginLeft = "+" + startx + "px";
+            document.getElementById('box').style.marginTop = "+" + starty + "px";
+            startx += 10;
+            starty += 10;
+        }, 500);
+    }
+</script>
+
+<body onload="diagonale()">
+    <div id="box">
+
+    </div>
+</body>
+
+</html>
