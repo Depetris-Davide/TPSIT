@@ -16,15 +16,17 @@
     }
 </style>
 <script>
-    var startx = 0;
-    var starty = 0;
+    let startx = 10;
+    let starty = 10;
 
     function diagonale() {
+        let timer = 500;
         setInterval(function() {
             document.getElementById('box').style.marginLeft = "+" + startx + "px";
             document.getElementById('box').style.marginTop = "+" + starty + "px";
-            startx += 10;
-            starty += 10;
+            startx += 1;
+            starty += 1;
+            diagonale();
         }, 500);
     }
 </script>
