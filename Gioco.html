@@ -66,9 +66,11 @@
 
     </div>
     <p>Clicca Fire quando vedi il colore verde!</p>
+    <p>Attenzione! Se clicchi il colore rosso riceverai una penalità</p>
     <p id="click2">I tuoi tempi: </p>
     <p id="med"></p>
-    <p id="go">Gioca!</p>
+    <p id="go">Score senza penalità</p>
+    <p id="gopen">Score con le penalità</p>
     <script>
         let tentativi = 10;
         let coloreArray = [];
@@ -81,6 +83,7 @@
         let coloreprecendente = 0;
         let casuale;
         let prendoiltempo;
+        let sommapen = 0;
 
         const miointervallo = setInterval(cambiacolore, 1000);
 
@@ -100,16 +103,19 @@
         }
         function prendiilcolore() {
             tentativi--;
+            if (casuale == 0) {
+                sommapen += 100;
+            }
             if (tentativi > 0) {
                 document.getElementById('tent').innerHTML = tentativi;
             }
             let tempoDifferenza;
             let media;
             let somma = 0;
-            let contmedia=0;
-            let i=0;
+            let contmedia = 0;
+            let i = 0;
             if (casuale == 1) {
-                if (tentativi > 0) {
+                if (tentativi >= 0) {
                     contmedia++;
                     tempoDifferenza = Date.now() - prendoiltempo;
                     arraytempiclick.push(tempoDifferenza);
@@ -120,12 +126,26 @@
             }
             if (tentativi == 0) {
                 document.getElementById('tent').innerHTML = '0';
-                document.getElementById('go').innerHTML = 'Score: ';
+                document.getElementById('go').innerHTML = 'Score senza penalità: ';
+                document.getElementById('gopen').innerHTML = 'Score con le penalità: ';
                 for (const element of arraytempiclick) {
-                    somma+=element;
+                    somma += element;
                 }
-                media = somma / 10;
-                document.getElementById('go').innerHTML += media;
+                if (somma > 0) {
+                    media = somma / 10;
+                    document.getElementById('go').innerHTML += media;
+                } else {
+                    document.getElementById('go').innerHTML += 'Nessun punto, Riprova!';
+                }
+                if (sommapen >= 100 && somma > 0) {
+                    sommapen += somma;
+                    media = sommapen / 10;
+                    document.getElementById('gopen').innerHTML += media;
+                } else if (somma > 0) {
+                    document.getElementById('gopen').innerHTML = 'Nessuna penalità, bravo!';
+                } else {
+                    document.getElementById('gopen').innerHTML += 'Nullo';
+                }
             }
         }
     </script>
