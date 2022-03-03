@@ -65,7 +65,10 @@
 
 
     </div>
-    <p id="go"></p>
+    <p>Clicca Fire quando vedi il colore verde!</p>
+    <p id="click2">I tuoi tempi: </p>
+    <p id="med"></p>
+    <p id="go">Gioca!</p>
     <script>
         let tentativi = 10;
         let coloreArray = [];
@@ -82,17 +85,17 @@
         const miointervallo = setInterval(cambiacolore, 1000);
 
         function cambiacolore() {
+            if (tentativi > 0) {
+                do {
+                    casuale = parseInt(Math.random() * 4);
+                }
+                while (casuale == coloreprecendente);
 
-            do {
-                casuale = parseInt(Math.random() * 4);
-            }
-            while (casuale == coloreprecendente);
-
-            document.getElementById("gameDiv").style.backgroundColor = coloreArray[casuale];
-            coloreprecendente = casuale;
-            // prendo il tempo quando esce il verde
-            if (casuale == 1) {
-                prendoiltempo = Date.now();
+                document.getElementById("gameDiv").style.backgroundColor = coloreArray[casuale];
+                coloreprecendente = casuale;
+                if (casuale == 1) {
+                    prendoiltempo = Date.now();
+                }
             }
         }
         function prendiilcolore() {
@@ -101,18 +104,28 @@
                 document.getElementById('tent').innerHTML = tentativi;
             }
             let tempoDifferenza;
+            let media;
+            let somma = 0;
+            let contmedia=0;
+            let i=0;
             if (casuale == 1) {
                 if (tentativi > 0) {
+                    contmedia++;
                     tempoDifferenza = Date.now() - prendoiltempo;
                     arraytempiclick.push(tempoDifferenza);
                     document.getElementById("click").innerText = tempoDifferenza;
+                    document.getElementById("click2").innerText += tempoDifferenza + ',';
                     document.getElementById('tent').innerHTML = tentativi;
                 }
             }
             if (tentativi == 0) {
                 document.getElementById('tent').innerHTML = '0';
-                document.getElementById('go').innerHTML = 'Fine';
-
+                document.getElementById('go').innerHTML = 'Score: ';
+                for (const element of arraytempiclick) {
+                    somma+=element;
+                }
+                media = somma / 10;
+                document.getElementById('go').innerHTML += media;
             }
         }
     </script>
