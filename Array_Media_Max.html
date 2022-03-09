@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        let arrayBello = [], num = 100, indice = 0, stopRiempi = 0, stopMax = 0, somma = 0, stopMedia = 0;
+        function riempiArray() {
+            if (stopRiempi == 0) {
+                for (let i = 0; i < num; i++) {
+                    arrayBello[i] = parseInt(Math.random() * 1000);
+                    document.getElementById("out").innerHTML += arrayBello[i] + " ";
+                    somma += arrayBello[i];
+                }
+                stopRiempi++;
+            }
+        }
+        function max() {
+            let massimo = arrayBello[0];
+            if (stopMax == 0) {
+                for (let i = 0; i < arrayBello.length / 2; i++) {
+                    if (arrayBello[i] > massimo) {
+                        massimo = arrayBello[i];
+                        indice = i;
+                    }
+                }
+                document.getElementById("outMassimo").innerHTML += massimo + " Posizione: " + indice;
+                stopMax++;
+            }
+        }
+        function media() {
+            if (stopMedia == 0) {
+                document.getElementById('outMedia').innerHTML += somma / arrayBello.length;
+                stopMedia++;
+            }
+        }
+        function reset() {
+            stopRiempi = 0
+            stopMax = 0
+            stopMedia = 0
+            somma = 0
+            document.getElementById("out").innerHTML = 'Numeri: ';
+            document.getElementById("outMassimo").innerHTML = 'Numero massimo tra i primi 50 numeri: ';
+            document.getElementById("outMedia").innerHTML = 'Media dei numeri: ';
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="riempiArray()">
+        Carica array
+    </button>
+    <button onclick="max()">
+        massimo
+    </button>
+    <button onclick="media()">
+        media
+    </button>
+    <button onclick="reset()">
+        reset
+    </button>
+    <p id="out">Numeri: </p>
+    <p id="outMassimo">Numero massimo tra i primi 50 numeri: </p>
+    <p id="outMedia">Media dei numeri: </p>
+</body>
+
+</html>
