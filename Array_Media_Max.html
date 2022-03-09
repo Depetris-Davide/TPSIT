@@ -20,21 +20,29 @@
         }
         function max() {
             let massimo = arrayBello[0];
-            if (stopMax == 0) {
-                for (let i = 0; i < arrayBello.length / 2; i++) {
-                    if (arrayBello[i] > massimo) {
-                        massimo = arrayBello[i];
-                        indice = i;
+            if (stopRiempi == 0) {
+                document.getElementById('outMassimo').innerHTML = 'Numero massimo tra i primi 50 numeri: Array non caricato';
+            } else {
+                if (stopMax == 0) {
+                    for (let i = 0; i < arrayBello.length / 2; i++) {
+                        if (arrayBello[i] > massimo) {
+                            massimo = arrayBello[i];
+                            indice = i;
+                        }
                     }
+                    document.getElementById("outMassimo").innerHTML = 'Numero massimo tra i primi 50 numeri: ' + massimo + " Posizione: " + indice;
+                    stopMax++;
                 }
-                document.getElementById("outMassimo").innerHTML += massimo + " Posizione: " + indice;
-                stopMax++;
             }
         }
         function media() {
-            if (stopMedia == 0) {
-                document.getElementById('outMedia').innerHTML += somma / arrayBello.length;
-                stopMedia++;
+            if (stopRiempi == 0) {
+                document.getElementById('outMedia').innerHTML = 'Media dei numeri: Array non caricato';
+            } else {
+                if (stopMedia == 0) {
+                    document.getElementById('outMedia').innerHTML = 'Media dei numeri:' + somma / arrayBello.length;
+                    stopMedia++;
+                }
             }
         }
         function reset() {
@@ -54,13 +62,13 @@
         Carica array
     </button>
     <button onclick="max()">
-        massimo
+        Massimo
     </button>
     <button onclick="media()">
-        media
+        Media
     </button>
     <button onclick="reset()">
-        reset
+        Reset
     </button>
     <p id="out">Numeri: </p>
     <p id="outMassimo">Numero massimo tra i primi 50 numeri: </p>
