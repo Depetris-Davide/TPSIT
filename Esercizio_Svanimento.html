@@ -34,12 +34,12 @@
                 a[divRand].style.backgroundColor = 'rgb(' + colR[divRand] + ',' + colG[divRand] + ',' + colB[divRand] + ')';
                 colR[divRand] -= 5;
                 colG[divRand] -= 5;
-                if (colB[divRand] <= 0) {
+                if (colR[divRand] <= 0) {
                     a[divRand].style.backgroundColor = 'white';
                     a[divRand].style.border = 'solid white';
                 }
             }
-        }, 0.1);
+        }, 1);
 
 
     }
